@@ -15,7 +15,7 @@ import API from 'api'
 const Count = 30
 const TIME = 2000
 // 休眠的时间
-const SLEEP = 6000
+const SLEEP = 2000
 const ButtonGroup = Button.Group
 const sleep = (delay = 0) => {
   new Promise((resolve) => {
@@ -139,7 +139,7 @@ class ProblemDetail extends React.Component {
       let timers = null
       try {
         timers = setInterval(async () => {
-          if (solution && solution['result_code'] > 0) {
+          if (solution && solution['result_code'] >-2) {
             timers && clearInterval(timers)
             console.log('返回结果，定时器被清除啦')
             message.success('判题成功')
@@ -179,7 +179,6 @@ class ProblemDetail extends React.Component {
                   }
                 ]
               })
-            } else if (result_code === -2) {
             }
             this.setState({
               resultCode: result_code,
@@ -198,12 +197,12 @@ class ProblemDetail extends React.Component {
             console.log('时间到了，定时器被清除啦')
             if (!solution) {
               message.error('当前排队人数太多，请重新提交')
-              this.setState({
-                unsubmit: false
-              })
             }
+            this.setState({
+              unsubmit: false
+            })
           }
-          if (count > SLEEP / TIME) {
+          if (count >= SLEEP / TIME) {
             solution = await requestService.tget(solutionUrl, solutionId)
           }
           count++
