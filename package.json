@@ -12,7 +12,7 @@
   "dependencies": {
     "antd": "^2.13.3",
     "babel-runtime": "^6.11.6",
-    "codemirror": "^5.30.0",
+    "codemirror": "^6.0.0",
     "copy-to-clipboard": "^3.0.8",
     "es6-promise": "^3.2.1",
     "gulp-rev-collector": "^1.0.5",
